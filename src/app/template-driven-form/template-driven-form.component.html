@@ -1,0 +1,111 @@
+<div layout="column" layout-fill>
+  <div align="center" layout="row" layout-align="center center">
+
+    <mat-card class="info-card mat-elevation-z8" flex="80" style="margin-top: 60px;width: 800px;;">
+
+      <mat-card-title></mat-card-title>
+      <mat-card-subtitle>
+      </mat-card-subtitle>
+
+      <mat-card-content fxLayout="column" fxLayoutAlign="stretch" >
+
+        <form fxLayout="column" fxLayoutAlign="start stretch" #formClient="ngForm" (ngSubmit)="onSubmit()" >
+
+          <div fxFlex="100"  fxLayout="row" fxLayoutAlign="space-between  start">
+            <mat-form-field fxFlex="45" >
+              <input matInput type="text" class="form-control" value="" placeholder="First Name" [(ngModel)]="client.firstName" name="firstName"
+              #firstNameField="ngModel" required minlength=3>
+              <mat-error *ngIf="firstNameField.errors?.required && firstNameField.touched">
+                Please enter the first name
+              </mat-error>
+              <mat-error *ngIf="firstNameField.errors?.minlength && firstNameField.touched">
+                Please enter at least 3 characters
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="45">
+              <input matInput type="text" class="form-control" value="" placeholder="Last Name" [(ngModel)]="client.lastName" name="lastName"
+              #lastNameField="ngModel" required minlength=3>
+              <mat-error *ngIf="lastNameField.errors?.required && lastNameField.touched">
+                Please enter the first name
+              </mat-error>
+              <mat-error *ngIf="lastNameField.errors?.minlength && lastNameField.touched">
+                Please enter at least 3 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="100"  fxLayout="row" fxLayoutAlign="space-between  start">
+
+            <mat-form-field fxFlex="45">
+              <input matInput  [matDatepicker]="dtbirth" placeholder="Date of Birth" [(ngModel)]="client.birth" name="birth"
+              #birthField="ngModel" required>
+              <mat-datepicker-toggle matSuffix [for]="dtbirth"></mat-datepicker-toggle>
+              <mat-datepicker #dtbirth></mat-datepicker>
+              <mat-error *ngIf="birthField.errors?.required && birthField.touched">
+                Please enter the date of birth
+              </mat-error>
+            </mat-form-field>
+
+            <mat-radio-group  fxFlex="45" fxLayout="column" fxLayoutAlign="space-between start" [(ngModel)]="client.gender"  name="gender"
+            #genderField="ngModel" required>
+              <mat-radio-button value="Male" checked>Male</mat-radio-button>
+              <mat-radio-button value="Female">Female</mat-radio-button>
+              <mat-error *ngIf="genderField.errors?.required && birthField.touched">
+                Please enter the gender
+              </mat-error>
+            </mat-radio-group>
+
+          </div>
+
+          <div fxFlex="100" fxLayoutAlign="start">
+              <h4>Address:</h4>
+          </div>
+          <div fxFlex="100"  fxLayout="row" fxLayoutAlign="space-between start">
+            <mat-form-field fxFlex="40" >
+              <input matInput type="text"
+                class="form-control" value="" placeholder="Street" [(ngModel)]="client.street" name="street">
+            </mat-form-field>
+            <mat-form-field fxFlex="30">
+              <input matInput type="text"
+                class="form-control" value="" placeholder="City" [(ngModel)]="client.city" name="city">
+            </mat-form-field>
+
+            <mat-form-field fxFlex="20">
+              <mat-select placeholder="State" [(ngModel)]="client.state" name="state">
+                <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="100" fxLayoutAlign="start">
+            <h4>Telephones: </h4>
+          </div>
+
+          <div fxFlex="100"  fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="20px">
+            <mat-form-field fxFlex="45" >
+              <input matInput type="text"
+                class="form-control" value="" placeholder="Telephone 1 " [(ngModel)]="client.phone1"  name="phone1"
+                [textMask]="{mask: phoneMask}">
+            </mat-form-field>
+            <mat-form-field fxFlex="45" >
+              <input matInput type="text"
+                class="form-control" value="" placeholder="Telephone 2" [(ngModel)]="client.phone2" name="phone2"
+                [textMask]="{mask: phoneMask}">
+            </mat-form-field>
+          </div>
+
+          <button mat-button color="primary" type="submit" [disabled]="!formClient.valid">
+            <mat-icon>done</mat-icon>Submit
+          </button>
+
+        </form>
+
+      </mat-card-content>
+      <mat-card-footer>
+      </mat-card-footer>
+    </mat-card>
+
+
+  </div>
+</div>
